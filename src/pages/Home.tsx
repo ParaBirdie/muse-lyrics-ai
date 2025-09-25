@@ -356,9 +356,9 @@ const Home = () => {
                       <Button
                         type="button"
                         onClick={startRecording}
-                        className="absolute right-20 top-1/2 -translate-y-1/2 w-12 h-12 p-0 rounded-full bg-secondary/30 hover:bg-secondary/50 shadow-sm hover:shadow-md transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-border/20"
+                        className="absolute right-20 top-1/2 -translate-y-1/2 w-12 h-12 p-0 rounded-full bg-secondary/60 hover:bg-secondary/80 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm"
                       >
-                        <Mic className="w-5 h-5 opacity-70" />
+                        <Mic className="w-5 h-5" />
                       </Button>
                     )}
 
