@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import SignIn from "./pages/SignIn";
+import Home from "./pages/Home";
 import AuthenticateEmail from "./pages/AuthenticateEmail";
 import NotFound from "./pages/NotFound";
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/authenticate-email" element={<AuthenticateEmail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
