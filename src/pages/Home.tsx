@@ -310,7 +310,7 @@ const Home = () => {
                 Back
               </Button>
             )}
-            <Logo />
+            <Logo size="md" />
           </div>
           <Button
             variant="secondary"
