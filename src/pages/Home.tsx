@@ -360,7 +360,7 @@ const Home = () => {
                         onFocus={() => setIsInputFocused(true)}
                         onBlur={() => setIsInputFocused(false)}
                         placeholder="Tell your story... / Type the theme..."
-                        className="w-full py-4 px-6 pr-32 text-base bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none custom-scrollbar"
+                        className="w-full py-4 px-6 pr-16 text-base bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none custom-scrollbar border-0 focus:ring-0"
                         rows={2}
                       />
                     )}
@@ -370,9 +370,9 @@ const Home = () => {
                       <Button
                         type="button"
                         onClick={startRecording}
-                        className="absolute right-20 top-1/2 -translate-y-1/2 w-12 h-12 p-0 rounded-full bg-secondary/60 hover:bg-secondary/80 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 p-0 rounded-full bg-transparent hover:bg-transparent border-0"
                       >
-                        <Mic className="w-5 h-5" />
+                        <Mic className="w-6 h-6 text-white" />
                       </Button>
                     )}
 
