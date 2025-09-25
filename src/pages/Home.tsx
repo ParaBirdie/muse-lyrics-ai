@@ -360,7 +360,7 @@ const Home = () => {
                         onFocus={() => setIsInputFocused(true)}
                         onBlur={() => setIsInputFocused(false)}
                         placeholder="Tell your story... / Type the theme..."
-                        className="w-full py-4 px-6 pr-16 text-base bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none custom-scrollbar border-0 focus:ring-0"
+                        className="w-full py-4 px-6 pr-16 text-base bg-card/50 border border-border/20 focus:border-border/40 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none custom-scrollbar focus:ring-0 focus:outline-none"
                         rows={2}
                       />
                     )}
