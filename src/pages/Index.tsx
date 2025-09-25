@@ -21,21 +21,7 @@ const Index = () => {
           <div className="flex items-center justify-center gap-6 max-w-2xl mx-auto">
             {/* Skip Microphone Button */}
             <button className="flex flex-col items-center justify-center p-4 bg-card border border-border rounded-xl hover:bg-card/80 transition-all group min-w-[100px] mx-0 px-0 py-[10px]">
-              {/* Custom Devil Mic Icon */}
-              <div className="h-10 w-10 mb-2 group-hover:scale-110 transition-transform">
-                <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
-                  {/* Devil horns */}
-                  <path d="M7 7L8 4L9 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent"/>
-                  <path d="M15 7L16 4L17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent"/>
-                  
-                  {/* Microphone body */}
-                  <ellipse cx="12" cy="11" rx="4" ry="6" fill="currentColor" className="text-primary"/>
-                  
-                  {/* Microphone stand */}
-                  <line x1="12" y1="17" x2="12" y2="20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-primary"/>
-                  <line x1="9" y1="20" x2="15" y2="20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-primary"/>
-                </svg>
-              </div>
+              <Mic className="h-6 w-6 text-primary mb-2 group-hover:scale-110 transition-transform" />
               <span className="text-sm font-medium text-muted-foreground">Skip</span>
             </button>
             
