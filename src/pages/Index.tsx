@@ -40,6 +40,36 @@ const Index = () => {
           </div>
         </div>
 
+        {/* Prominent artistic elements in middle section */}
+        <div className="relative py-12">
+          {/* Abstract figure silhouette - more visible */}
+          <div className="absolute left-8 top-4 w-48 h-60 opacity-20">
+            <div className="w-full h-full bg-gradient-to-br from-foreground/60 to-foreground/30 transform rotate-12 rounded-[30px]">
+            </div>
+            <div className="absolute top-6 left-3 w-12 h-12 bg-foreground/50 rounded-full"></div>
+            <div className="absolute top-2 left-2 text-foreground/40 text-xs font-bold tracking-wider">VISIONS</div>
+          </div>
+          
+          {/* Circular portrait element */}
+          <div className="absolute right-12 top-8 w-40 h-40 opacity-25">
+            <div className="w-full h-full border-8 border-primary/60 rounded-full">
+              <div className="w-full h-full bg-gradient-radial from-primary/30 to-transparent rounded-full flex items-center justify-center">
+                <div className="w-20 h-20 bg-foreground/40 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Minimalist number element */}
+          <div className="absolute left-1/2 top-12 transform -translate-x-1/2 opacity-15">
+            <div className="text-6xl font-thin text-primary tracking-[0.2em]">222</div>
+          </div>
+          
+          {/* Warm abstract shapes */}
+          <div className="absolute right-8 bottom-4 w-32 h-24 opacity-20">
+            <div className="w-full h-full bg-gradient-to-tr from-accent/50 to-primary/40 rounded-2xl transform -rotate-12"></div>
+          </div>
+        </div>
+
         {/* Auth buttons positioned in bottom area */}
         <div className="max-w-4xl mx-auto text-center space-y-12 pb-16">
           <div className="flex justify-center max-w-md mx-auto">
