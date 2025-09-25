@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Mic, Square } from "lucide-react";
+import { ArrowLeft, Mic, Square, RefreshCw } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -48,6 +48,12 @@ const Home = () => {
     const shuffled = [...emotionCategories].sort(() => 0.5 - Math.random());
     setRandomEmotions(shuffled.slice(0, 3));
   }, []);
+
+  // Function to refresh the emotions
+  const refreshEmotions = () => {
+    const shuffled = [...emotionCategories].sort(() => 0.5 - Math.random());
+    setRandomEmotions(shuffled.slice(0, 3));
+  };
 
   useEffect(() => {
     // Check if user is authenticated
@@ -418,19 +424,33 @@ const Home = () => {
                 )}
 
                 {!story && !isGenerating && (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8">
-                    {randomEmotions.map((emotion, index) => (
+                  <>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8">
+                      {randomEmotions.map((emotion, index) => (
+                        <Button
+                          key={index}
+                          variant="secondary"
+                          className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
+                          onClick={() => setStory(emotion.prompt)}
+                        >
+                          <span className="font-semibold">{emotion.title}</span>
+                          <span className="text-sm text-muted-foreground">{emotion.description}</span>
+                        </Button>
+                      ))}
+                    </div>
+                    
+                    {/* Refresh button */}
+                    <div className="flex justify-center mt-6">
                       <Button
-                        key={index}
-                        variant="secondary"
-                        className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
-                        onClick={() => setStory(emotion.prompt)}
+                        variant="ghost"
+                        size="sm"
+                        onClick={refreshEmotions}
+                        className="text-muted-foreground hover:text-foreground w-8 h-8 p-0 rounded-full hover:bg-transparent active:bg-transparent focus:bg-transparent"
                       >
-                        <span className="font-semibold">{emotion.title}</span>
-                        <span className="text-sm text-muted-foreground">{emotion.description}</span>
+                        <RefreshCw className="w-4 h-4" />
                       </Button>
-                    ))}
-                  </div>
+                    </div>
+                  </>
                 )}
               </div>
             </div>
