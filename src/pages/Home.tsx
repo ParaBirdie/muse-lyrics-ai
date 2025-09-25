@@ -292,32 +292,45 @@ const Home = () => {
 
                 <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
                   <div className="relative">
-                    <textarea
-                      value={story}
-                      onChange={(e) => setStory(e.target.value)}
-                      onFocus={() => setIsInputFocused(true)}
-                      onBlur={() => setIsInputFocused(false)}
-                      placeholder="Tell your story... / Type the theme..."
-                      className="w-full py-6 px-6 pr-32 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none min-h-[80px] max-h-[200px]"
-                      rows={3}
-                    />
+                    {/* Show textarea only when recording, listening, or transcribing */}
+                    {(isRecording || isListening || isTranscribing) ? (
+                      <textarea
+                        value={story}
+                        onChange={(e) => setStory(e.target.value)}
+                        onFocus={() => setIsInputFocused(true)}
+                        onBlur={() => setIsInputFocused(false)}
+                        placeholder="Tell your story... / Type the theme..."
+                        className="w-full py-6 px-6 pr-32 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none min-h-[80px] max-h-[200px]"
+                        rows={3}
+                      />
+                    ) : (
+                      <Input
+                        value={story}
+                        onChange={(e) => setStory(e.target.value)}
+                        onFocus={() => setIsInputFocused(true)}
+                        onBlur={() => setIsInputFocused(false)}
+                        placeholder="Tell your story... / Type the theme..."
+                        className="w-full py-6 px-6 pr-32 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60"
+                      />
+                    )}
                     
-                    {/* Microphone Button */}
-                    {!isRecording && !isTranscribing && (
+                    {/* Microphone Button - only show when not recording/listening/transcribing and no text */}
+                    {!isRecording && !isListening && !isTranscribing && !story && (
                       <Button
                         type="button"
                         onClick={startRecording}
-                        className="absolute right-20 top-6 w-10 h-10 p-0 rounded-full bg-secondary hover:bg-secondary/80"
+                        className="absolute right-20 top-1/2 -translate-y-1/2 w-10 h-10 p-0 rounded-full bg-secondary hover:bg-secondary/80"
                       >
                         <Mic className="w-4 h-4" />
                       </Button>
                     )}
 
-                    {story && !isRecording && !isTranscribing && (
+                    {/* Generate Button - only show when there's text and not in recording states */}
+                    {story && !isRecording && !isListening && !isTranscribing && (
                       <Button
                         type="submit"
                         disabled={isGenerating}
-                        className="absolute right-2 top-6 bg-primary hover:bg-primary/90 disabled:opacity-50"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 disabled:opacity-50"
                       >
                         {isGenerating ? "Generating..." : "Generate"}
                       </Button>
