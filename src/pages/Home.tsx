@@ -232,12 +232,28 @@ const Home = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-left space-y-2">
-                    {lyrics.split('\n').filter(line => line.trim()).map((line, index) => (
-                      <p key={index} className="text-foreground leading-relaxed">
-                        {line}
-                      </p>
-                    ))}
+                  <div className="text-left space-y-4">
+                    {lyrics.split('\n').filter(line => line.trim()).map((line, index) => {
+                      if (line.startsWith('Verse:')) {
+                        return (
+                          <div key={index} className="font-bold text-lg text-primary mb-2">
+                            {line}
+                          </div>
+                        );
+                      } else if (line.startsWith('Hook:')) {
+                        return (
+                          <div key={index} className="font-bold text-lg text-accent mb-2 mt-4">
+                            {line}
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <p key={index} className="text-foreground leading-relaxed ml-4">
+                            {line}
+                          </p>
+                        );
+                      }
+                    })}
                   </div>
                 </CardContent>
               </Card>

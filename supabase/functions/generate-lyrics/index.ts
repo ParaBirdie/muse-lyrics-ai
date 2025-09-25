@@ -39,17 +39,25 @@ serve(async (req) => {
 
     console.log('Generating lyrics for story:', story);
 
-    const prompt = `Create exactly 12 lines of song lyrics based on this theme: "${story.trim()}"
+    const prompt = `Create song lyrics based on this theme: "${story.trim()}"
 
 Requirements:
-- Exactly 12 lines, no more, no less
-- Lines should rhyme (ABAB, AABB, or similar rhyme scheme)
+- Generate a Verse section with 12-16 lines 
+- Generate a Hook section with 4-8 lines (catchy and repeatable)
+- NO numbering or bullet points
 - Keep it appropriate and positive
 - Make it catchy and memorable
 - Focus on the emotions and story elements
 - Each line should be concise but meaningful
 
-Return only the lyrics, numbered 1-12, nothing else.`;
+Format the response exactly like this:
+Verse:
+[verse lyrics here, each line on a new line]
+
+Hook:
+[hook lyrics here, each line on a new line]
+
+Return only the lyrics in this format, nothing else.`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
