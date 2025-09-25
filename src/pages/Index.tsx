@@ -34,8 +34,7 @@ const Index = () => {
         <div className="flex-1 flex flex-col justify-center">
           <div className="max-w-4xl mx-auto text-center space-y-6 mt-8">
             <Logo className="flex justify-center" />
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">Your story matters. 
-Transform your raw ideas to polished lyrics. </p>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium"> </p>
           </div>
         </div>
 
