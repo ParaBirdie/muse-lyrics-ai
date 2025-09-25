@@ -129,28 +129,6 @@ const Home = () => {
     }
   };
 
-  // Function to combine lyrics and verse2 into editable content
-  const getCombinedLyrics = () => {
-    let combinedContent = lyrics;
-    
-    if (verse2) {
-      // Add verse 2 and repeat hook
-      const hookLines = lyrics.split('\n').filter(line => line.trim() && !line.startsWith('Verse:') && !line.startsWith('Hook:'));
-      const hookContent = hookLines.slice(-4); // Get last 4 lines as hook content
-      
-      combinedContent += '\n\nVerse 2:\n' + verse2;
-      combinedContent += '\n\nHook:\n' + hookContent.join('\n');
-    }
-    
-    return combinedContent;
-  };
-
-  const handleLyricsEdit = (newLyrics: string) => {
-    setLyrics(newLyrics);
-    // Clear verse2 since we're now working with combined content
-    setVerse2("");
-  };
-
   const handleRegenerate = () => {
     setLyrics("");
     setStory("");
@@ -485,12 +463,98 @@ const Home = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <textarea
-                    value={getCombinedLyrics()}
-                    onChange={(e) => handleLyricsEdit(e.target.value)}
-                    className="w-full h-96 p-4 text-left bg-transparent border border-border/20 focus:border-border/40 rounded-lg resize-none focus:ring-0 focus:outline-none text-foreground leading-relaxed font-mono text-sm"
-                    placeholder="Your generated lyrics will appear here and can be edited..."
-                  />
+                  <div className="text-left space-y-4">
+                    {(() => {
+                      let lyricLineCount = 0;
+                      const originalLyrics = lyrics.split('\n').filter(line => line.trim()).map((line, index) => {
+                        if (line.startsWith('Verse:')) {
+                          return (
+                            <div key={index} className="font-bold text-xl text-green-400 mb-2">
+                              {line}
+                            </div>
+                          );
+                        } else if (line.startsWith('Hook:')) {
+                          return (
+                            <div key={index} className="font-bold text-xl text-green-400 mb-2 mt-6">
+                              {line}
+                            </div>
+                          );
+                        } else {
+                          // This is an actual lyric line, increment counter
+                          lyricLineCount++;
+                          // Add separator every 4 actual lyric lines
+                          const isBarSeparator = lyricLineCount > 1 && (lyricLineCount - 1) % 4 === 0;
+                          
+                          return (
+                            <div key={index}>
+                              {isBarSeparator && (
+                                <div className="w-full h-px bg-border/20 my-4"></div>
+                              )}
+                              <p className="text-foreground leading-relaxed ml-4">
+                                {line}
+                              </p>
+                            </div>
+                          );
+                        }
+                      });
+
+                      // If verse 2 exists, add it after the original lyrics
+                      if (verse2) {
+                        const hookFromOriginal = lyrics.split('\n').filter(line => line.trim() && line.startsWith('Hook:')).join('\n');
+                        const hookLines = lyrics.split('\n').filter(line => line.trim() && !line.startsWith('Verse:') && !line.startsWith('Hook:'));
+                        const hookContent = hookLines.slice(-4); // Get last 4 lines as hook content
+                        
+                        // Add Verse 2
+                        originalLyrics.push(
+                          <div key="verse2-title" className="font-bold text-xl text-green-400 mb-2 mt-8">
+                            Verse 2:
+                          </div>
+                        );
+                        
+                        const verse2Lines = verse2.split('\n').filter(line => line.trim());
+                        verse2Lines.forEach((line, index) => {
+                          lyricLineCount++;
+                          const isBarSeparator = lyricLineCount > 1 && (lyricLineCount - 1) % 4 === 0;
+                          
+                          originalLyrics.push(
+                            <div key={`verse2-${index}`}>
+                              {isBarSeparator && (
+                                <div className="w-full h-px bg-border/20 my-4"></div>
+                              )}
+                              <p className="text-foreground leading-relaxed ml-4">
+                                {line}
+                              </p>
+                            </div>
+                          );
+                        });
+
+                        // Repeat Hook
+                        originalLyrics.push(
+                          <div key="hook-repeat" className="font-bold text-xl text-green-400 mb-2 mt-6">
+                            Hook:
+                          </div>
+                        );
+                        
+                        hookContent.forEach((line, index) => {
+                          lyricLineCount++;
+                          const isBarSeparator = lyricLineCount > 1 && (lyricLineCount - 1) % 4 === 0;
+                          
+                          originalLyrics.push(
+                            <div key={`hook-repeat-${index}`}>
+                              {isBarSeparator && (
+                                <div className="w-full h-px bg-border/20 my-4"></div>
+                              )}
+                              <p className="text-foreground leading-relaxed ml-4">
+                                {line}
+                              </p>
+                            </div>
+                          );
+                        });
+                      }
+
+                      return originalLyrics;
+                    })()}
+                  </div>
                 </CardContent>
               </Card>
               
