@@ -113,6 +113,7 @@ const Home = () => {
         toast({
           title: "Lyrics generated!",
           description: "Your personalized lyrics are ready",
+          duration: 1500,
         });
       } else {
         throw new Error('No lyrics received');
