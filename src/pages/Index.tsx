@@ -20,7 +20,7 @@ const Index = () => {
           {/* Auth Form */}
           <div className="flex items-center justify-center gap-6 max-w-2xl mx-auto">
             {/* Skip Microphone Button */}
-            <button className="flex flex-col items-center justify-center p-4 bg-card border border-border rounded-xl hover:bg-card/80 transition-all group min-w-[100px]">
+            <button className="flex flex-col items-center justify-center p-4 bg-card border border-border rounded-xl hover:bg-card/80 transition-all group min-w-[100px] mx-0 px-0 py-[10px]">
               <Mic className="h-6 w-6 text-primary mb-2 group-hover:scale-110 transition-transform" />
               <span className="text-sm font-medium text-muted-foreground">Skip</span>
             </button>
