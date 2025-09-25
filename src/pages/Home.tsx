@@ -285,6 +285,15 @@ const Home = () => {
         {/* Header */}
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate("/")}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
             {lyrics && (
               <Button
                 variant="ghost"
@@ -293,7 +302,7 @@ const Home = () => {
                 className="text-muted-foreground hover:text-foreground"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
+                New Story
               </Button>
             )}
             <Logo size="md" />
