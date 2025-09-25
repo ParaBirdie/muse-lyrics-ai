@@ -411,9 +411,8 @@ const Home = () => {
                     <Button
                       variant="ghost"
                       onClick={handleRegenerate}
-                      className="text-muted-foreground hover:text-foreground text-sm"
+                      className="text-muted-foreground hover:text-foreground text-sm hover:bg-transparent active:bg-transparent focus:bg-transparent"
                     >
-                      <ArrowLeft className="w-4 h-4 mr-2" />
                       Back to Search
                     </Button>
                   </div>
