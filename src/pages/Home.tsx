@@ -440,7 +440,7 @@ const Home = () => {
                     </div>
                     
                     {/* Refresh button */}
-                    <div className="flex justify-end max-w-4xl mx-auto mt-8 pr-8">
+                    <div className="flex justify-end max-w-4xl mx-auto mt-4 pr-8">
                       <Button
                         variant="ghost"
                         size="sm"
