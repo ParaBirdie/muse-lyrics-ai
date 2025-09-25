@@ -34,8 +34,8 @@ const Index = () => {
         <div className="flex-1 flex flex-col justify-center">
           <div className="max-w-4xl mx-auto text-center space-y-6 mt-8">
             <Logo className="flex justify-center" />
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">Your story matters. 
-Transform your raw ideas to polished lyrics. </p>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">Your story matters
+Transform your raw ideas to polished lyrics</p>
           </div>
         </div>
 
@@ -45,7 +45,7 @@ Transform your raw ideas to polished lyrics. </p>
           <div className="flex justify-center max-w-md mx-auto -mt-4">
             <div className="space-y-4 w-full">
               <Link to="/signin">
-                <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98] py-[12px] my-[20px]">
+                <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98] px-[6px] py-[8px] mx-0 my-px">
                   Sign In
                 </button>
               </Link>
