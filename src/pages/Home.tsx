@@ -289,7 +289,7 @@ const Home = () => {
                 </CardContent>
               </Card>
               
-              <div className="flex gap-8 justify-center mb-24">
+              <div className="flex gap-8 justify-center mb-32">
                 <Button
                   onClick={handleRegenerate}
                   variant="secondary"
