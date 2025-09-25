@@ -304,13 +304,14 @@ const Home = () => {
                         rows={3}
                       />
                     ) : (
-                      <Input
+                      <textarea
                         value={story}
                         onChange={(e) => setStory(e.target.value)}
                         onFocus={() => setIsInputFocused(true)}
                         onBlur={() => setIsInputFocused(false)}
                         placeholder="Tell your story... / Type the theme..."
-                        className="w-full py-8 px-8 pr-32 text-xl bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 min-h-[100px]"
+                        className="w-full py-8 px-8 pr-32 text-xl bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none"
+                        rows={3}
                       />
                     )}
                     
