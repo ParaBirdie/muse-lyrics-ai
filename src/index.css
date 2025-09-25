@@ -81,13 +81,13 @@ All colors MUST be HSL.
     border-right: 4px solid rgb(74, 222, 128); /* green-400 */
     white-space: nowrap;
     width: 0;
-    animation: typing 2s steps(15) forwards, blink-caret 2s infinite;
+    animation: typing 2.5s steps(40) forwards, blink-caret 2.5s infinite;
     animation-delay: 0s, 0s;
   }
   
   .typewriter-text.cursor-hidden {
     border-right: 4px solid transparent;
-    animation: typing 2s steps(15) forwards;
+    animation: typing 2.5s steps(40) forwards;
   }
   
   @keyframes typing {

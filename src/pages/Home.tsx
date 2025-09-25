@@ -174,7 +174,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="opacity-0 animate-fade-in-up" style={{animationDelay: '2.2s', animationFillMode: 'forwards'}}>
+              <div className="opacity-0 animate-fade-in-up" style={{animationDelay: '2.7s', animationFillMode: 'forwards'}}>
                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
                   Transform your thoughts into powerful lyrics. What's on your mind?
                 </p>
