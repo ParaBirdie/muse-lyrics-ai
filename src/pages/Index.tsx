@@ -83,7 +83,7 @@ const Index = () => {
 
         {/* Auth buttons positioned in bottom area */}
         <div className="max-w-4xl mx-auto text-center space-y-12 pb-16">
-          <div className="flex justify-center max-w-md mx-auto">
+          <div className="flex justify-center max-w-md mx-auto -mt-4">
             <div className="space-y-4 w-full">
               <Link to="/signin">
                 <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98] py-[12px]">
