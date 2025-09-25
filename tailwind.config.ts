@@ -104,12 +104,30 @@ export default {
             opacity: "1"
           }
         },
+        "typewriter": {
+          "0%": {
+            width: "0"
+          },
+          "100%": {
+            width: "100%"
+          }
+        },
+        "blink": {
+          "0%, 50%": {
+            "border-color": "transparent"
+          },
+          "51%, 100%": {
+            "border-color": "currentColor"
+          }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in-up": "fade-in-up 0.8s ease-out",
-        "fade-in": "fade-in 1s ease-out",
+        "fade-in-up": "fade-in-up 1.5s ease-out",
+        "fade-in": "fade-in 2s ease-out",
+        "typewriter": "typewriter 2s steps(15, end)",
+        "blink": "blink 1s infinite",
       },
     },
   },

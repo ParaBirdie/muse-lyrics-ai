@@ -70,4 +70,27 @@ All colors MUST be HSL.
   html {
     background-color: hsl(140 30% 12%);
   }
+  
+  /* Typewriter effect */
+  .typewriter-container {
+    position: relative;
+  }
+  
+  .typewriter-text {
+    overflow: hidden;
+    border-right: 4px solid rgb(74, 222, 128); /* green-400 */
+    white-space: nowrap;
+    width: 0;
+    animation: typing 2s steps(15) forwards, blink-caret 1s infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    0%, 50% { border-color: transparent; }
+    51%, 100% { border-color: rgb(74, 222, 128); }
+  }
 }
