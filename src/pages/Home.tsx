@@ -16,6 +16,7 @@ const Home = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [randomEmotions, setRandomEmotions] = useState<Array<{title: string, description: string, prompt: string}>>([]);
+  const [isInitialVisit, setIsInitialVisit] = useState(true);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -125,6 +126,7 @@ const Home = () => {
   const handleRegenerate = () => {
     setLyrics("");
     setStory("");
+    setIsInitialVisit(false); // Disable animations when returning from lyrics page
   };
 
   if (!user) {
@@ -191,13 +193,13 @@ const Home = () => {
             <div className="space-y-8 text-center">
               <div className="space-y-4">
                 <div className="typewriter-container inline-block">
-                  <h1 className={`text-4xl md:text-6xl font-bold font-inter bg-gradient-to-r from-green-400 via-green-300 to-green-500 bg-clip-text text-transparent typewriter-text ${isInputFocused ? 'cursor-hidden' : ''}`}>
+                  <h1 className={`text-4xl md:text-6xl font-bold font-inter bg-gradient-to-r from-green-400 via-green-300 to-green-500 bg-clip-text text-transparent ${isInitialVisit ? 'typewriter-text' : 'no-typewriter'} ${isInputFocused ? 'cursor-hidden' : ''}`}>
                     Tell Your Story
                   </h1>
                 </div>
               </div>
 
-              <div className="opacity-0 animate-fade-in-up" style={{animationDelay: '2.7s', animationFillMode: 'forwards'}}>
+              <div className={`${isInitialVisit ? 'opacity-0 animate-fade-in-up' : ''}`} style={isInitialVisit ? {animationDelay: '2.7s', animationFillMode: 'forwards'} : {}}>
                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
                   Transform your thoughts into powerful lyrics. What's on your mind?
                 </p>

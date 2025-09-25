@@ -90,6 +90,13 @@ All colors MUST be HSL.
     animation: typing 2.5s steps(40) forwards;
   }
   
+  /* When not initial visit, show text immediately without typewriter effect */
+  .no-typewriter {
+    width: auto !important;
+    border-right: none !important;
+    animation: none !important;
+  }
+  
   @keyframes typing {
     from { width: 0; }
     to { 
