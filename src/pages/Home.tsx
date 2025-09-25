@@ -405,6 +405,20 @@ const Home = () => {
                   )}
                 </form>
 
+                {/* Back to Search Button - only show when there's content */}
+                {(story || lyrics) && (
+                  <div className="text-center mt-6">
+                    <Button
+                      variant="ghost"
+                      onClick={handleRegenerate}
+                      className="text-muted-foreground hover:text-foreground text-sm"
+                    >
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Back to Search
+                    </Button>
+                  </div>
+                )}
+
                 {!story && !isGenerating && (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8">
                     {randomEmotions.map((emotion, index) => (
