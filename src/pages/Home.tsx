@@ -236,7 +236,7 @@ const Home = () => {
                     {lyrics.split('\n').filter(line => line.trim()).map((line, index, filteredLines) => {
                       if (line.startsWith('Verse:')) {
                         return (
-                          <div key={index} className="font-bold text-xl text-blue-400 mb-2">
+                          <div key={index} className="font-bold text-xl text-green-400 mb-2">
                             {line}
                           </div>
                         );
@@ -271,7 +271,7 @@ const Home = () => {
                 </CardContent>
               </Card>
               
-              <div className="flex gap-4 justify-center mb-8">
+              <div className="flex gap-4 justify-center mb-16">
                 <Button
                   onClick={handleRegenerate}
                   variant="secondary"
