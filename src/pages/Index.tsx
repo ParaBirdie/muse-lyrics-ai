@@ -1,8 +1,9 @@
-import { AuthForm } from "@/components/auth/AuthForm";
 import { Logo } from "@/components/ui/logo";
-import { Mic } from "lucide-react";
+import { Link } from "react-router-dom";
+
 const Index = () => {
-  return <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+  return (
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       {/* Background artistic elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
@@ -17,32 +18,20 @@ const Index = () => {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">Your story matters. Transform your raw ideas into polished lyrics. Record your thoughts, choose your style, and watch AI craft your vision into verses.</p>
           </div>
 
-          {/* Auth Form */}
+          {/* Simple Auth Buttons */}
           <div className="flex justify-center max-w-md mx-auto">
-            <div className="relative w-full">
-              {/* Artistic accent behind form */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-2xl blur-xl opacity-30"></div>
-              
-              <div className="relative w-full p-8 bg-card border border-border rounded-xl backdrop-blur-sm">
-                <div className="space-y-6">
-                  <div className="text-center space-y-2">
-                    <h2 className="text-3xl font-bold text-foreground">
-                      Create Account
-                    </h2>
-                    <p className="text-muted-foreground">Transform your story into lyrics with AI</p>
-                  </div>
-                  <div className="space-y-4">
-                    <input type="email" placeholder="Enter your email" className="w-full p-3 bg-input border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
-                    <input type="password" placeholder="Enter your password" className="w-full p-3 bg-input border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all" />
-                    <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
-                      Create Account
-                    </button>
-                    <button className="w-full p-2 text-muted-foreground hover:text-foreground transition-colors text-sm underline underline-offset-4 hover:no-underline">
-                      Skip for now
-                    </button>
-                  </div>
-                </div>
-              </div>
+            <div className="space-y-4 w-full">
+              <Link to="/auth">
+                <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                  Sign In
+                </button>
+              </Link>
+              <p className="text-sm text-muted-foreground">
+                Don't have an account?{" "}
+                <Link to="/auth" className="text-primary hover:text-primary/80 underline underline-offset-4 hover:no-underline transition-colors">
+                  Sign up here
+                </Link>
+              </p>
             </div>
           </div>
 
@@ -54,6 +43,7 @@ const Index = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 export default Index;
