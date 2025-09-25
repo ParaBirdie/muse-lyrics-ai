@@ -26,7 +26,7 @@ const Index = () => {
         
         {/* Header */}
         <header className="absolute top-0 left-0 right-0 p-6 sm:p-8 flex justify-between items-center">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-start">
             <div 
               className="h-0.5 w-20 mb-2"
               style={{
@@ -34,14 +34,9 @@ const Index = () => {
                 boxShadow: '0 0 15px #a6f0c6, 0 0 20px #a6f0c6'
               }}
             ></div>
-            <h1 className="text-3xl font-bold tracking-wider text-white">
-              <span className="font-medium">Ghost</span>
-              <span 
-                className="font-bold"
-                style={{
-                  textShadow: '0 0 8px rgba(166, 240, 198, 0.7), 0 0 10px rgba(166, 240, 198, 0.5)'
-                }}
-              >Pen</span>
+            <h1 className="text-3xl font-bold tracking-wider">
+              <span className="text-[#a6f0c6] font-bold">Ghost</span>
+              <span className="text-[#a6f0c6] font-light">Pen</span>
             </h1>
           </div>
           <button aria-label="Open menu">
