@@ -71,13 +71,7 @@ const Index = () => {
           </div>
 
 
-          {/* 50 CENT - center */}
-          <div className="absolute left-1/2 top-20 transform -translate-x-1/2 rotate-[-2deg] opacity-20">
-            <div className="text-5xl font-black text-foreground">
-              <span className="text-6xl">50</span>
-              <div className="text-2xl font-black tracking-wider -mt-2">CENT</div>
-            </div>
-          </div>
+     
 
           {/* Keep the green circular elements from screenshots 6-7 */}
           <div className="absolute top-4 right-8 w-32 h-32 opacity-[0.06]">
