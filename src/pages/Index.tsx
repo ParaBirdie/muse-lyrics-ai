@@ -64,14 +64,14 @@ const Index = () => {
           </div>
 
           {/* LIL WAYNE - left center */}
-          <div className="absolute left-20 top-32 opacity-28 transform rotate-[-3deg]">
+          <div className="absolute left-20 top-32 opacity-20 transform rotate-[-6deg]">
             <div className="text-3xl font-black text-foreground tracking-[0.1em]">
               LIL<span className="text-primary">W</span>AYNE
             </div>
           </div>
 
           {/* DR. DRE - bottom right */}
-          <div className="absolute right-22 bottom-16 opacity-25 transform rotate-6">
+          <div className="absolute right-16 bottom-20 opacity-22 transform rotate-7">
             <div className="text-2xl font-thin text-foreground tracking-[0.3em]">
               DR
               <span className="relative mx-2">
