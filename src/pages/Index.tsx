@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
-
 const Index = () => {
-  return (
-    <div className="bg-[#0d1a1f] text-[#e0e0e0] antialiased min-h-screen relative overflow-hidden">
+  return <div className="bg-[#0d1a1f] text-[#e0e0e0] antialiased min-h-screen relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <span className="absolute text-5xl top-[25%] left-[5%] font-bold tracking-wider opacity-[0.05] text-white transform -rotate-[15deg]">JCOLE</span>
@@ -18,7 +16,7 @@ const Index = () => {
 
         {/* Soundwave line */}
         <svg className="absolute bottom-[25%] left-0 w-1/4 h-12 opacity-5" viewBox="0 0 200 50">
-           <path d="M0,25 Q25,0 50,25 T100,25 T150,25 T200,25" stroke="white" strokeWidth="2" fill="none"/>
+           <path d="M0,25 Q25,0 50,25 T100,25 T150,25 T200,25" stroke="white" strokeWidth="2" fill="none" />
         </svg>
       </div>
 
@@ -27,21 +25,15 @@ const Index = () => {
         {/* Header */}
         <header className="absolute top-0 left-0 right-0 p-6 sm:p-8 flex justify-between items-center">
           <div className="flex flex-col items-center">
-            <div 
-              className="h-0.5 w-20 mb-2"
-              style={{
-                background: 'linear-gradient(90deg, transparent, #a6f0c6, transparent)',
-                boxShadow: '0 0 15px #a6f0c6, 0 0 20px #a6f0c6'
-              }}
-            ></div>
+            <div className="h-0.5 w-20 mb-2" style={{
+            background: 'linear-gradient(90deg, transparent, #a6f0c6, transparent)',
+            boxShadow: '0 0 15px #a6f0c6, 0 0 20px #a6f0c6'
+          }}></div>
             <h1 className="text-3xl font-bold tracking-wider text-white">
               <span className="font-medium">Ghost</span>
-              <span 
-                className="font-bold"
-                style={{
-                  textShadow: '0 0 8px rgba(166, 240, 198, 0.7), 0 0 10px rgba(166, 240, 198, 0.5)'
-                }}
-              >Pen</span>
+              <span className="font-bold" style={{
+              textShadow: '0 0 8px rgba(166, 240, 198, 0.7), 0 0 10px rgba(166, 240, 198, 0.5)'
+            }}>Pen</span>
             </h1>
           </div>
           <button aria-label="Open menu">
@@ -56,9 +48,7 @@ const Index = () => {
           <div className="w-full flex flex-col md:flex-row items-center justify-between">
             {/* Left Text Content */}
             <div className="md:w-1/2 text-center md:text-left z-10 mb-12 md:mb-0">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight text-white mb-6">
-                Your story matters. Transform your raw ideas into polished lyrics.
-              </h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight text-white mb-6">Your story matters...</h2>
               <p className="text-base md:text-lg text-gray-300 max-w-lg mx-auto md:mx-0">
                 Record your thoughts, choose your style, and watch AI craft your vision into verses.
               </p>
@@ -68,22 +58,17 @@ const Index = () => {
             <div className="md:w-1/2 flex justify-center items-center z-0 relative">
               <div className="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72">
                 {/* Glowing Microphone SVG */}
-                <svg 
-                  className="w-full h-full" 
-                  viewBox="0 0 64 64" 
-                  xmlns="http://www.w3.org/2000/svg"
-                  style={{
-                    filter: 'drop-shadow(0px 0px 10px rgba(227, 255, 240, 0.8)) drop-shadow(0px 0px 20px rgba(166, 240, 198, 0.6))'
-                  }}
-                >
+                <svg className="w-full h-full" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" style={{
+                filter: 'drop-shadow(0px 0px 10px rgba(227, 255, 240, 0.8)) drop-shadow(0px 0px 20px rgba(166, 240, 198, 0.6))'
+              }}>
                   <g strokeWidth="2.5" stroke="#e3fff0" fill="none" strokeLinecap="round" strokeLinejoin="round">
                     {/* Main body */}
-                    <rect x="20" y="8" width="24" height="36" rx="12"/>
+                    <rect x="20" y="8" width="24" height="36" rx="12" />
                     {/* A single 'shine' line to add flair */}
-                    <path d="M26,18 Q32,20 38,26" strokeWidth="2"/>
+                    <path d="M26,18 Q32,20 38,26" strokeWidth="2" />
                     {/* Stand */}
-                    <line x1="32" y1="44" x2="32" y2="56"/>
-                    <line x1="24" y1="56" x2="40" y2="56"/>
+                    <line x1="32" y1="44" x2="32" y2="56" />
+                    <line x1="24" y1="56" x2="40" y2="56" />
                   </g>
                 </svg>
               </div>
@@ -93,18 +78,13 @@ const Index = () => {
           {/* CTA Section */}
           <div className="mt-12 sm:mt-16 w-full max-w-sm flex flex-col items-center z-10">
             <Link to="/signin" className="w-full">
-              <button 
-                className="w-full bg-[#a6f0c6] text-gray-900 font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5"
-                style={{
-                  boxShadow: '0 0 15px rgba(166, 240, 198, 0.4), 0 0 20px rgba(166, 240, 198, 0.3)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 0 25px rgba(166, 240, 198, 0.6), 0 0 35px rgba(166, 240, 198, 0.4)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 0 15px rgba(166, 240, 198, 0.4), 0 0 20px rgba(166, 240, 198, 0.3)';
-                }}
-              >
+              <button className="w-full bg-[#a6f0c6] text-gray-900 font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5" style={{
+              boxShadow: '0 0 15px rgba(166, 240, 198, 0.4), 0 0 20px rgba(166, 240, 198, 0.3)'
+            }} onMouseEnter={e => {
+              e.currentTarget.style.boxShadow = '0 0 25px rgba(166, 240, 198, 0.6), 0 0 35px rgba(166, 240, 198, 0.4)';
+            }} onMouseLeave={e => {
+              e.currentTarget.style.boxShadow = '0 0 15px rgba(166, 240, 198, 0.4), 0 0 20px rgba(166, 240, 198, 0.3)';
+            }}>
                 Sign In
               </button>
             </Link>
@@ -125,8 +105,6 @@ const Index = () => {
           </p>
         </footer>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
