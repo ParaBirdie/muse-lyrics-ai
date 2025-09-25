@@ -38,48 +38,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Artist logos scattered randomly across the screen */}
-        <div className="relative min-h-[200px] py-0">
-          {/* J.COLE logo - top left */}
-          <div className="absolute left-12 top-8 opacity-25 transform rotate-[-5deg]">
-            <div className="text-2xl font-bold text-foreground tracking-wide">
-              J
-              <span className="relative">
-                C
-                <div className="absolute -top-1 -right-1 w-3 h-3 border-2 border-foreground rounded-full"></div>
-                <div className="absolute -top-2 -right-3 w-2 h-4 border-l-2 border-foreground transform rotate-12"></div>
-                <div className="absolute -top-2 right-1 w-2 h-4 border-l-2 border-foreground transform -rotate-12"></div>
-              </span>
-              OLE
-            </div>
-          </div>
-
-          {/* CASH MONEY RECORDS - center right */}
-          <div className="absolute right-16 top-12 opacity-30 transform rotate-3">
-            <div className="border-8 border-foreground p-4 bg-foreground text-background">
-              <div className="text-xs font-black tracking-tight">CASH MONEY</div>
-              <div className="text-3xl font-black my-1">$</div>
-              <div className="text-xs font-black tracking-tight">RECORDS</div>
-            </div>
-          </div>
-
-          {/* LIL WAYNE - left center */}
-          <div className="absolute left-20 top-32 opacity-20 transform rotate-[-6deg]">
-            <div className="text-3xl font-black text-foreground tracking-[0.1em]">
-              LIL<span className="text-primary">W</span>AYNE
-            </div>
-          </div>
-
-
-     
-
-          {/* Keep the green circular elements from screenshots 6-7 */}
-          <div className="absolute top-4 right-8 w-32 h-32 opacity-[0.06]">
-            <div className="w-full h-full border-4 border-primary/40 rounded-full"></div>
-            <div className="absolute inset-4 bg-gradient-radial from-primary/20 to-transparent rounded-full"></div>
-          </div>
-
-        </div>
 
         {/* Auth buttons positioned in bottom area */}
         <div className="max-w-4xl mx-auto text-center space-y-12 pb-16">
