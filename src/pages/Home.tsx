@@ -14,6 +14,7 @@ const Home = () => {
   const [story, setStory] = useState("");
   const [lyrics, setLyrics] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -167,20 +168,22 @@ const Home = () => {
             <div className="space-y-8 text-center">
               <div className="space-y-4 animate-fade-in-up">
                 <div className="typewriter-container inline-block">
-                  <h1 className="text-4xl md:text-6xl font-bold font-inter bg-gradient-to-r from-green-400 via-green-300 to-green-500 bg-clip-text text-transparent typewriter-text">
+                  <h1 className={`text-4xl md:text-6xl font-bold font-inter bg-gradient-to-r from-green-400 via-green-300 to-green-500 bg-clip-text text-transparent typewriter-text ${isInputFocused ? 'cursor-hidden' : ''}`}>
                     Tell Your Story
                   </h1>
                 </div>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '2.2s'}}>
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '0.8s'}}>
                   Transform your thoughts into powerful lyrics. What's on your mind?
                 </p>
               </div>
 
-            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '2.5s'}}>
+            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '1.2s'}}>
               <div className="relative">
                 <Input
                   value={story}
                   onChange={(e) => setStory(e.target.value)}
+                  onFocus={() => setIsInputFocused(true)}
+                  onBlur={() => setIsInputFocused(false)}
                   placeholder="Tell your story... / Type the theme..."
                   className="w-full py-6 px-6 pr-28 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60"
                 />
@@ -197,7 +200,7 @@ const Home = () => {
             </form>
 
               {!story && !isGenerating && (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8 animate-fade-in-up" style={{animationDelay: '3s'}}>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8 animate-fade-in-up" style={{animationDelay: '1.6s'}}>
                   <Button
                     variant="secondary"
                     className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
