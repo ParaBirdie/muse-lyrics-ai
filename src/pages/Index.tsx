@@ -71,7 +71,7 @@ const Index = () => {
           </div>
 
           {/* DR. DRE - bottom right */}
-          <div className="absolute right-12 bottom-16 opacity-25 transform rotate-2">
+          <div className="absolute right-22 bottom-16 opacity-25 transform rotate-6">
             <div className="text-2xl font-thin text-foreground tracking-[0.3em]">
               DR
               <span className="relative mx-2">
