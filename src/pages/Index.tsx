@@ -21,7 +21,7 @@ const Index = () => {
           {/* Simple Auth Buttons */}
           <div className="flex justify-center max-w-md mx-auto">
             <div className="space-y-4 w-full">
-              <Link to="/auth">
+              <Link to="/signin">
                 <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
                   Sign In
                 </button>

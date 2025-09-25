@@ -3,20 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 
-const Auth = () => {
+const SignIn = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleCreateAccount = (e: React.FormEvent) => {
+  const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
     if (email && password) {
-      navigate("/authenticate-email");
+      navigate("/home"); // Will navigate to home after successful sign in
     }
-  };
-
-  const handleSkipForNow = () => {
-    navigate("/home"); // Will be created later
   };
 
   return (
@@ -43,19 +39,19 @@ const Auth = () => {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">Your story matters. Transform your raw ideas into polished lyrics. Record your thoughts, choose your style, and watch AI craft your vision into verses.</p>
           </div>
 
-          {/* Auth Form */}
+          {/* Sign In Form */}
           <div className="flex justify-center max-w-md mx-auto">
             <div className="relative w-full">
               {/* Artistic accent behind form */}
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-2xl blur-xl opacity-30"></div>
               
               <div className="relative w-full p-8 bg-card border border-border rounded-xl backdrop-blur-sm">
-                <form onSubmit={handleCreateAccount} className="space-y-6">
+                <form onSubmit={handleSignIn} className="space-y-6">
                   <div className="text-center space-y-2">
                     <h2 className="text-3xl font-bold text-foreground">
-                      Create Account
+                      Sign In
                     </h2>
-                    <p className="text-muted-foreground">Transform your story into lyrics with AI</p>
+                    <p className="text-muted-foreground">Welcome back to your creative journey</p>
                   </div>
                   <div className="space-y-4">
                     <input 
@@ -78,17 +74,19 @@ const Auth = () => {
                       type="submit"
                       className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
                     >
-                      Create Account
-                    </button>
-                    <button 
-                      type="button"
-                      onClick={handleSkipForNow}
-                      className="w-full p-2 text-muted-foreground hover:text-foreground transition-colors text-sm underline underline-offset-4 hover:no-underline"
-                    >
-                      Skip for now
+                      Sign In
                     </button>
                   </div>
                 </form>
+                
+                <div className="text-center mt-4">
+                  <p className="text-sm text-muted-foreground">
+                    Don't have an account?{" "}
+                    <Link to="/auth" className="text-primary hover:text-primary/80 underline underline-offset-4 hover:no-underline transition-colors">
+                      Sign up here
+                    </Link>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -105,4 +103,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default SignIn;
