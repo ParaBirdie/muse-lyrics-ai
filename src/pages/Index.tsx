@@ -70,16 +70,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* DR. DRE - bottom right */}
-          <div className="absolute right-16 bottom-20 opacity-22 transform rotate-7">
-            <div className="text-2xl font-thin text-foreground tracking-[0.3em]">
-              DR
-              <span className="relative mx-2">
-                <span className="text-primary">⚘</span>
-              </span>
-              DRE
-            </div>
-          </div>
 
           {/* 50 CENT - center */}
           <div className="absolute left-1/2 top-20 transform -translate-x-1/2 rotate-[-2deg] opacity-20">
