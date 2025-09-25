@@ -300,7 +300,7 @@ const Home = () => {
                         onFocus={() => setIsInputFocused(true)}
                         onBlur={() => setIsInputFocused(false)}
                         placeholder="Tell your story... / Type the theme..."
-                        className="w-full py-6 px-6 pr-32 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none min-h-[80px] max-h-[200px]"
+                        className="w-full py-8 px-8 pr-32 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none custom-scrollbar"
                         rows={3}
                       />
                     ) : (
@@ -310,8 +310,8 @@ const Home = () => {
                         onFocus={() => setIsInputFocused(true)}
                         onBlur={() => setIsInputFocused(false)}
                         placeholder="Tell your story... / Type the theme..."
-                        className="w-full py-8 px-8 pr-32 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none custom-scrollbar"
-                        rows={3}
+                        className="w-full py-4 px-6 pr-32 text-base bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none custom-scrollbar"
+                        rows={2}
                       />
                     )}
                     
