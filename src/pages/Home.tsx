@@ -180,7 +180,7 @@ const Home = () => {
                   value={story}
                   onChange={(e) => setStory(e.target.value)}
                   placeholder="Tell your story... / Type the theme..."
-                  className="w-full py-6 px-6 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60"
+                  className="w-full py-6 px-6 pr-28 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60"
                 />
                 {story && (
                   <Button
@@ -233,24 +233,37 @@ const Home = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-left space-y-4">
-                    {lyrics.split('\n').filter(line => line.trim()).map((line, index) => {
+                    {lyrics.split('\n').filter(line => line.trim()).map((line, index, filteredLines) => {
                       if (line.startsWith('Verse:')) {
                         return (
-                          <div key={index} className="font-bold text-lg text-primary mb-2">
+                          <div key={index} className="font-bold text-xl text-blue-400 mb-2">
                             {line}
                           </div>
                         );
                       } else if (line.startsWith('Hook:')) {
                         return (
-                          <div key={index} className="font-bold text-lg text-accent mb-2 mt-4">
+                          <div key={index} className="font-bold text-xl text-green-400 mb-2 mt-6">
                             {line}
                           </div>
                         );
                       } else {
+                        // Add separator every 4 bars (lines)
+                        const isBarSeparator = index > 0 && 
+                          !filteredLines[index-1].startsWith('Verse:') && 
+                          !filteredLines[index-1].startsWith('Hook:') &&
+                          !line.startsWith('Verse:') && 
+                          !line.startsWith('Hook:') &&
+                          (index - 1) % 4 === 3;
+                        
                         return (
-                          <p key={index} className="text-foreground leading-relaxed ml-4">
-                            {line}
-                          </p>
+                          <div key={index}>
+                            {isBarSeparator && (
+                              <div className="w-full h-px bg-border/20 my-4"></div>
+                            )}
+                            <p className="text-foreground leading-relaxed ml-4">
+                              {line}
+                            </p>
+                          </div>
                         );
                       }
                     })}
@@ -258,7 +271,7 @@ const Home = () => {
                 </CardContent>
               </Card>
               
-              <div className="flex gap-4 justify-center">
+              <div className="flex gap-4 justify-center mb-8">
                 <Button
                   onClick={handleRegenerate}
                   variant="secondary"
