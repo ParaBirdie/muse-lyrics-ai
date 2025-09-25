@@ -162,11 +162,11 @@ const Home = () => {
         </div>
 
         {/* Main content - centered like ChatGPT */}
-        <div className="flex-1 flex flex-col justify-center max-w-4xl mx-auto w-full">
+        <div className="flex-1 flex flex-col justify-center max-w-4xl mx-auto w-full animate-fade-in">
           {!lyrics ? (
             <div className="space-y-8 text-center">
-              <div className="space-y-4">
-                <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <div className="space-y-4 animate-fade-in-up">
+                <h1 className="text-4xl md:text-6xl font-bold font-inter bg-gradient-to-r from-green-400 via-green-300 to-green-500 bg-clip-text text-transparent">
                   Tell Your Story
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -174,7 +174,7 @@ const Home = () => {
                 </p>
               </div>
 
-            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '0.2s'}}>
               <div className="relative">
                 <Input
                   value={story}
@@ -195,7 +195,7 @@ const Home = () => {
             </form>
 
               {!story && !isGenerating && (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
                   <Button
                     variant="secondary"
                     className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
@@ -224,7 +224,7 @@ const Home = () => {
               )}
             </div>
           ) : (
-            <div className="space-y-6 text-center">
+            <div className="space-y-6 text-center animate-fade-in-up">
               <Card className="max-w-2xl mx-auto bg-card/50 backdrop-blur-sm border-border/50">
                 <CardHeader>
                   <CardTitle className="text-2xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
