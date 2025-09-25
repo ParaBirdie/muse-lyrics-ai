@@ -233,40 +233,40 @@ const Home = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-left space-y-4">
-                    {lyrics.split('\n').filter(line => line.trim()).map((line, index, filteredLines) => {
-                      if (line.startsWith('Verse:')) {
-                        return (
-                          <div key={index} className="font-bold text-xl text-green-400 mb-2">
-                            {line}
-                          </div>
-                        );
-                      } else if (line.startsWith('Hook:')) {
-                        return (
-                          <div key={index} className="font-bold text-xl text-green-400 mb-2 mt-6">
-                            {line}
-                          </div>
-                        );
-                      } else {
-                        // Add separator every 4 bars (lines)
-                        const isBarSeparator = index > 0 && 
-                          !filteredLines[index-1].startsWith('Verse:') && 
-                          !filteredLines[index-1].startsWith('Hook:') &&
-                          !line.startsWith('Verse:') && 
-                          !line.startsWith('Hook:') &&
-                          (index - 1) % 4 === 3;
-                        
-                        return (
-                          <div key={index}>
-                            {isBarSeparator && (
-                              <div className="w-full h-px bg-border/20 my-4"></div>
-                            )}
-                            <p className="text-foreground leading-relaxed ml-4">
+                    {(() => {
+                      let lyricLineCount = 0;
+                      return lyrics.split('\n').filter(line => line.trim()).map((line, index) => {
+                        if (line.startsWith('Verse:')) {
+                          return (
+                            <div key={index} className="font-bold text-xl text-green-400 mb-2">
                               {line}
-                            </p>
-                          </div>
-                        );
-                      }
-                    })}
+                            </div>
+                          );
+                        } else if (line.startsWith('Hook:')) {
+                          return (
+                            <div key={index} className="font-bold text-xl text-green-400 mb-2 mt-6">
+                              {line}
+                            </div>
+                          );
+                        } else {
+                          // This is an actual lyric line, increment counter
+                          lyricLineCount++;
+                          // Add separator every 4 actual lyric lines
+                          const isBarSeparator = lyricLineCount > 1 && (lyricLineCount - 1) % 4 === 0;
+                          
+                          return (
+                            <div key={index}>
+                              {isBarSeparator && (
+                                <div className="w-full h-px bg-border/20 my-4"></div>
+                              )}
+                              <p className="text-foreground leading-relaxed ml-4">
+                                {line}
+                              </p>
+                            </div>
+                          );
+                        }
+                      });
+                    })()}
                   </div>
                 </CardContent>
               </Card>
