@@ -39,7 +39,7 @@ const Index = () => {
         </div>
 
         {/* Artist logos scattered randomly across the screen */}
-        <div className="relative min-h-[400px] py-0">
+        <div className="relative min-h-[200px] py-0">
           {/* J.COLE logo - top left */}
           <div className="absolute left-12 top-8 opacity-25 transform rotate-[-5deg]">
             <div className="text-2xl font-bold text-foreground tracking-wide">
