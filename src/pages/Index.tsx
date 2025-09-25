@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="bg-[#0d1a1f] text-[#e0e0e0] antialiased min-h-screen relative overflow-hidden font-inter">
+    <div className="bg-[#0d1a1f] text-[#e0e0e0] antialiased min-h-screen relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <span className="absolute text-5xl top-[25%] left-[5%] font-bold tracking-wider opacity-[0.05] text-white transform -rotate-[15deg]">JCOLE</span>
@@ -26,7 +26,7 @@ const Index = () => {
         
         {/* Header */}
         <header className="absolute top-0 left-0 right-0 p-6 sm:p-8 flex justify-between items-center">
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-center">
             <div 
               className="h-0.5 w-20 mb-2"
               style={{
@@ -34,9 +34,14 @@ const Index = () => {
                 boxShadow: '0 0 15px #a6f0c6, 0 0 20px #a6f0c6'
               }}
             ></div>
-            <h1 className="text-3xl font-bold tracking-wider">
-              <span className="text-[#a6f0c6] font-bold">Ghost</span>
-              <span className="text-[#a6f0c6] font-light">Pen</span>
+            <h1 className="text-3xl font-bold tracking-wider text-white">
+              <span className="font-medium">Ghost</span>
+              <span 
+                className="font-bold"
+                style={{
+                  textShadow: '0 0 8px rgba(166, 240, 198, 0.7), 0 0 10px rgba(166, 240, 198, 0.5)'
+                }}
+              >Pen</span>
             </h1>
           </div>
           <button aria-label="Open menu">
