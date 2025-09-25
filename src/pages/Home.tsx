@@ -20,6 +20,8 @@ const Home = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isTranscribing, setIsTranscribing] = useState(false);
+  const [verse2, setVerse2] = useState("");
+  const [isGeneratingVerse2, setIsGeneratingVerse2] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const navigate = useNavigate();
@@ -131,7 +133,52 @@ const Home = () => {
   const handleRegenerate = () => {
     setLyrics("");
     setStory("");
+    setVerse2(""); // Clear verse 2 as well
     setIsInitialVisit(false); // Disable animations when returning from lyrics page
+  };
+
+  const handleGenerateVerse2 = async () => {
+    if (!story.trim()) {
+      toast({
+        title: "No story found",
+        description: "Please generate the first verse and hook first",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsGeneratingVerse2(true);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-lyrics', {
+        body: { 
+          story: story.trim(),
+          generateVerse2: true // Flag to indicate we want verse 2
+        }
+      });
+
+      if (error) throw error;
+
+      if (data?.lyrics) {
+        setVerse2(data.lyrics);
+        toast({
+          title: "Verse 2 generated!",
+          description: "Your complete song is ready",
+        });
+      } else {
+        throw new Error('No verse 2 received');
+      }
+      
+    } catch (error: any) {
+      console.error('Error generating verse 2:', error);
+      toast({
+        title: "Failed to generate verse 2",
+        description: error.message || "Please try again",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGeneratingVerse2(false);
+    }
   };
 
   // Audio recording functions
@@ -389,7 +436,7 @@ const Home = () => {
                   <div className="text-left space-y-4">
                     {(() => {
                       let lyricLineCount = 0;
-                      return lyrics.split('\n').filter(line => line.trim()).map((line, index) => {
+                      const originalLyrics = lyrics.split('\n').filter(line => line.trim()).map((line, index) => {
                         if (line.startsWith('Verse:')) {
                           return (
                             <div key={index} className="font-bold text-xl text-green-400 mb-2">
@@ -420,6 +467,62 @@ const Home = () => {
                           );
                         }
                       });
+
+                      // If verse 2 exists, add it after the original lyrics
+                      if (verse2) {
+                        const hookFromOriginal = lyrics.split('\n').filter(line => line.trim() && line.startsWith('Hook:')).join('\n');
+                        const hookLines = lyrics.split('\n').filter(line => line.trim() && !line.startsWith('Verse:') && !line.startsWith('Hook:'));
+                        const hookContent = hookLines.slice(-4); // Get last 4 lines as hook content
+                        
+                        // Add Verse 2
+                        originalLyrics.push(
+                          <div key="verse2-title" className="font-bold text-xl text-green-400 mb-2 mt-8">
+                            Verse 2:
+                          </div>
+                        );
+                        
+                        const verse2Lines = verse2.split('\n').filter(line => line.trim());
+                        verse2Lines.forEach((line, index) => {
+                          lyricLineCount++;
+                          const isBarSeparator = lyricLineCount > 1 && (lyricLineCount - 1) % 4 === 0;
+                          
+                          originalLyrics.push(
+                            <div key={`verse2-${index}`}>
+                              {isBarSeparator && (
+                                <div className="w-full h-px bg-border/20 my-4"></div>
+                              )}
+                              <p className="text-foreground leading-relaxed ml-4">
+                                {line}
+                              </p>
+                            </div>
+                          );
+                        });
+
+                        // Repeat Hook
+                        originalLyrics.push(
+                          <div key="hook-repeat" className="font-bold text-xl text-green-400 mb-2 mt-6">
+                            Hook:
+                          </div>
+                        );
+                        
+                        hookContent.forEach((line, index) => {
+                          lyricLineCount++;
+                          const isBarSeparator = lyricLineCount > 1 && (lyricLineCount - 1) % 4 === 0;
+                          
+                          originalLyrics.push(
+                            <div key={`hook-repeat-${index}`}>
+                              {isBarSeparator && (
+                                <div className="w-full h-px bg-border/20 my-4"></div>
+                              )}
+                              <p className="text-foreground leading-relaxed ml-4">
+                                {line}
+                              </p>
+                            </div>
+                          );
+                        });
+                      }
+
+                      return originalLyrics;
                     })()}
                   </div>
                 </CardContent>
@@ -440,6 +543,15 @@ const Home = () => {
                 >
                   {isGenerating ? "Regenerating..." : "Regenerate"}
                 </Button>
+                {!verse2 && (
+                  <Button
+                    onClick={handleGenerateVerse2}
+                    disabled={isGeneratingVerse2}
+                    className="bg-accent hover:bg-accent/90"
+                  >
+                    {isGeneratingVerse2 ? "Generating..." : "Generate Verse 2"}
+                  </Button>
+                )}
               </div>
             </div>
           )}

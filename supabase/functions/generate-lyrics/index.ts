@@ -25,7 +25,7 @@ serve(async (req) => {
   }
 
   try {
-    const { story } = await req.json();
+    const { story, generateVerse2 } = await req.json();
 
     if (!story || typeof story !== 'string' || story.trim().length === 0) {
       return new Response(
@@ -38,8 +38,24 @@ serve(async (req) => {
     }
 
     console.log('Generating lyrics for story:', story);
+    console.log('Generate verse 2?', generateVerse2);
 
-    const prompt = `Create song lyrics based on this theme: "${story.trim()}"
+    let prompt;
+    
+    if (generateVerse2) {
+      prompt = `Create a second verse for a song based on this theme: "${story.trim()}"
+
+Requirements:
+- Generate ONLY a Verse 2 section with 12-16 lines
+- Continue the story/theme from the first verse but add new perspective or details
+- Make it rhyme and flow well with the original theme
+- Keep it appropriate and positive
+- Make it catchy and memorable
+- Focus on progressing the emotions and story elements
+
+Return ONLY the verse lyrics, no labels, no formatting, just the lyrics lines.`;
+    } else {
+      prompt = `Create song lyrics based on this theme: "${story.trim()}"
 
 Requirements:
 - Generate a Verse section with 12-16 lines 
@@ -58,6 +74,7 @@ Hook:
 [hook lyrics here, each line on a new line]
 
 Return only the lyrics in this format, nothing else.`;
+    }
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
