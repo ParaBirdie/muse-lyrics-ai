@@ -81,7 +81,8 @@ All colors MUST be HSL.
     border-right: 4px solid rgb(74, 222, 128); /* green-400 */
     white-space: nowrap;
     width: 0;
-    animation: typing 2s steps(15) forwards, blink-caret 1s infinite;
+    animation: typing 2s steps(15) forwards, blink-caret 2s infinite;
+    animation-delay: 0s, 0s;
   }
   
   .typewriter-text.cursor-hidden {
@@ -91,11 +92,15 @@ All colors MUST be HSL.
   
   @keyframes typing {
     from { width: 0; }
-    to { width: 100%; }
+    to { 
+      width: 100%; 
+      border-right-color: transparent;
+    }
   }
   
   @keyframes blink-caret {
     0%, 50% { border-color: transparent; }
-    51%, 100% { border-color: rgb(74, 222, 128); }
+    51%, 99% { border-color: rgb(74, 222, 128); }
+    100% { border-color: transparent; }
   }
 }
