@@ -32,16 +32,16 @@ const Index = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10 min-h-screen flex flex-col">
-        {/* Content positioned in bottom third */}
-        <div className="flex-1"></div>
-        <div className="max-w-4xl mx-auto text-center space-y-12 pb-16">
-          {/* Logo/Brand */}
-          <div className="space-y-6">
+        {/* Logo and description positioned higher */}
+        <div className="flex-1 flex flex-col justify-center">
+          <div className="max-w-4xl mx-auto text-center space-y-6 -mt-20">
             <Logo className="flex justify-center" />
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">Your story matters. Transform your raw ideas into polished lyrics. Record your thoughts, choose your style, and watch AI craft your vision into verses.</p>
           </div>
+        </div>
 
-          {/* Simple Auth Buttons */}
+        {/* Auth buttons positioned in bottom area */}
+        <div className="max-w-4xl mx-auto text-center space-y-12 pb-16">
           <div className="flex justify-center max-w-md mx-auto">
             <div className="space-y-4 w-full">
               <Link to="/signin">
