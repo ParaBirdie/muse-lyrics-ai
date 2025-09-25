@@ -149,6 +149,7 @@ const Home = () => {
 
       mediaRecorder.onstop = async () => {
         const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        setIsListening(false); // Hide "I'm listening..." when transcription starts
         await transcribeAudio(audioBlob);
         
         // Stop all tracks to release microphone
@@ -158,15 +159,6 @@ const Home = () => {
       setIsRecording(true);
       setIsListening(true);
       mediaRecorder.start();
-
-      // Show "I'm listening..." for 2 seconds, then automatically stop
-      setTimeout(() => {
-        setIsListening(false);
-        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
-          mediaRecorderRef.current.stop();
-          setIsRecording(false);
-        }
-      }, 2000);
 
     } catch (error) {
       console.error('Error accessing microphone:', error);
@@ -182,7 +174,6 @@ const Home = () => {
     if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
-      setIsListening(false);
     }
   };
 
@@ -305,22 +296,17 @@ const Home = () => {
                     />
                     
                     {/* Microphone Button */}
-                    <Button
-                      type="button"
-                      onClick={isRecording ? stopRecording : startRecording}
-                      disabled={isListening}
-                      className={`absolute right-20 top-1/2 -translate-y-1/2 w-10 h-10 p-0 rounded-full ${
-                        isRecording ? 'bg-red-500 hover:bg-red-600' : 'bg-secondary hover:bg-secondary/80'
-                      } ${isListening ? 'opacity-50' : ''}`}
-                    >
-                      {isRecording ? (
-                        <Square className="w-4 h-4" />
-                      ) : (
+                    {!isRecording && (
+                      <Button
+                        type="button"
+                        onClick={startRecording}
+                        className="absolute right-20 top-1/2 -translate-y-1/2 w-10 h-10 p-0 rounded-full bg-secondary hover:bg-secondary/80"
+                      >
                         <Mic className="w-4 h-4" />
-                      )}
-                    </Button>
+                      </Button>
+                    )}
 
-                    {story && (
+                    {story && !isRecording && (
                       <Button
                         type="submit"
                         disabled={isGenerating}
@@ -331,10 +317,17 @@ const Home = () => {
                     )}
                   </div>
 
-                  {/* Listening indicator */}
+                  {/* Listening indicator and I'm done button */}
                   {isListening && (
-                    <div className="text-center mt-4">
+                    <div className="text-center mt-4 space-y-3">
                       <p className="text-green-400 font-medium animate-pulse">I'm listening...</p>
+                      <Button
+                        type="button"
+                        onClick={stopRecording}
+                        className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full"
+                      >
+                        I'm done
+                      </Button>
                     </div>
                   )}
                 </form>
