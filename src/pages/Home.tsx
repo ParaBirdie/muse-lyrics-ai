@@ -19,6 +19,7 @@ const Home = () => {
   const [isInitialVisit, setIsInitialVisit] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const navigate = useNavigate();
@@ -150,6 +151,7 @@ const Home = () => {
       mediaRecorder.onstop = async () => {
         const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
         setIsListening(false); // Hide "I'm listening..." when transcription starts
+        setIsTranscribing(true); // Show "Transcribing..." 
         await transcribeAudio(audioBlob);
         
         // Stop all tracks to release microphone
@@ -192,15 +194,19 @@ const Home = () => {
 
         if (data?.text) {
           setStory(data.text);
+          setIsTranscribing(false); // Hide "Transcribing..."
           toast({
             title: "Speech Transcribed",
             description: "Your speech has been converted to text!",
           });
+        } else {
+          setIsTranscribing(false);
         }
       };
       reader.readAsDataURL(audioBlob);
     } catch (error) {
       console.error('Error transcribing audio:', error);
+      setIsTranscribing(false); // Hide "Transcribing..." on error
       toast({
         title: "Transcription Error",
         description: "Failed to transcribe audio. Please try again.",
@@ -286,31 +292,32 @@ const Home = () => {
 
                 <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
                   <div className="relative">
-                    <Input
+                    <textarea
                       value={story}
                       onChange={(e) => setStory(e.target.value)}
                       onFocus={() => setIsInputFocused(true)}
                       onBlur={() => setIsInputFocused(false)}
                       placeholder="Tell your story... / Type the theme..."
-                      className="w-full py-6 px-6 pr-32 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60"
+                      className="w-full py-6 px-6 pr-32 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60 resize-none min-h-[80px] max-h-[200px]"
+                      rows={3}
                     />
                     
                     {/* Microphone Button */}
-                    {!isRecording && (
+                    {!isRecording && !isTranscribing && (
                       <Button
                         type="button"
                         onClick={startRecording}
-                        className="absolute right-20 top-1/2 -translate-y-1/2 w-10 h-10 p-0 rounded-full bg-secondary hover:bg-secondary/80"
+                        className="absolute right-20 top-6 w-10 h-10 p-0 rounded-full bg-secondary hover:bg-secondary/80"
                       >
                         <Mic className="w-4 h-4" />
                       </Button>
                     )}
 
-                    {story && !isRecording && (
+                    {story && !isRecording && !isTranscribing && (
                       <Button
                         type="submit"
                         disabled={isGenerating}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 disabled:opacity-50"
+                        className="absolute right-2 top-6 bg-primary hover:bg-primary/90 disabled:opacity-50"
                       >
                         {isGenerating ? "Generating..." : "Generate"}
                       </Button>
@@ -328,6 +335,13 @@ const Home = () => {
                       >
                         I'm done
                       </Button>
+                    </div>
+                  )}
+
+                  {/* Transcribing indicator */}
+                  {isTranscribing && (
+                    <div className="text-center mt-4">
+                      <p className="text-blue-400 font-medium animate-pulse">Transcribing...</p>
                     </div>
                   )}
                 </form>
