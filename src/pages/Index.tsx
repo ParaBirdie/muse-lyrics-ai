@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="bg-[#0d1a1f] text-[#e0e0e0] antialiased min-h-screen relative overflow-hidden">
+    <div className="bg-[#0d1a1f] text-[#e0e0e0] antialiased min-h-screen relative overflow-hidden font-inter">
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <span className="absolute text-5xl top-[25%] left-[5%] font-bold tracking-wider opacity-[0.05] text-white transform -rotate-[15deg]">JCOLE</span>
