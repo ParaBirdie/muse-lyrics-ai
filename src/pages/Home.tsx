@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Mic, Square } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,10 @@ const Home = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [randomEmotions, setRandomEmotions] = useState<Array<{title: string, description: string, prompt: string}>>([]);
   const [isInitialVisit, setIsInitialVisit] = useState(true);
+  const [isRecording, setIsRecording] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -129,6 +133,91 @@ const Home = () => {
     setIsInitialVisit(false); // Disable animations when returning from lyrics page
   };
 
+  // Audio recording functions
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
+
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        await transcribeAudio(audioBlob);
+        
+        // Stop all tracks to release microphone
+        stream.getTracks().forEach(track => track.stop());
+      };
+
+      setIsRecording(true);
+      setIsListening(true);
+      mediaRecorder.start();
+
+      // Show "I'm listening..." for 2 seconds, then automatically stop
+      setTimeout(() => {
+        setIsListening(false);
+        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+          mediaRecorderRef.current.stop();
+          setIsRecording(false);
+        }
+      }, 2000);
+
+    } catch (error) {
+      console.error('Error accessing microphone:', error);
+      toast({
+        title: "Microphone Error",
+        description: "Could not access microphone. Please check permissions.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+      setIsListening(false);
+    }
+  };
+
+  const transcribeAudio = async (audioBlob: Blob) => {
+    try {
+      // Convert blob to base64
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Audio = (reader.result as string).split(',')[1];
+        
+        const { data, error } = await supabase.functions.invoke('speech-to-text', {
+          body: { audio: base64Audio }
+        });
+
+        if (error) throw error;
+
+        if (data?.text) {
+          setStory(data.text);
+          toast({
+            title: "Speech Transcribed",
+            description: "Your speech has been converted to text!",
+          });
+        }
+      };
+      reader.readAsDataURL(audioBlob);
+    } catch (error) {
+      console.error('Error transcribing audio:', error);
+      toast({
+        title: "Transcription Error",
+        description: "Failed to transcribe audio. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   if (!user) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -205,25 +294,49 @@ const Home = () => {
                 </p>
 
                 <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-              <div className="relative">
-                <Input
-                  value={story}
-                  onChange={(e) => setStory(e.target.value)}
-                  onFocus={() => setIsInputFocused(true)}
-                  onBlur={() => setIsInputFocused(false)}
-                  placeholder="Tell your story... / Type the theme..."
-                  className="w-full py-6 px-6 pr-28 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60"
-                />
-                {story && (
-                  <Button
-                    type="submit"
-                    disabled={isGenerating}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 disabled:opacity-50"
-                  >
-                    {isGenerating ? "Generating..." : "Generate"}
-                  </Button>
-                )}
-              </div>
+                  <div className="relative">
+                    <Input
+                      value={story}
+                      onChange={(e) => setStory(e.target.value)}
+                      onFocus={() => setIsInputFocused(true)}
+                      onBlur={() => setIsInputFocused(false)}
+                      placeholder="Tell your story... / Type the theme..."
+                      className="w-full py-6 px-6 pr-32 text-lg bg-card/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl backdrop-blur-sm placeholder:text-muted-foreground/60"
+                    />
+                    
+                    {/* Microphone Button */}
+                    <Button
+                      type="button"
+                      onClick={isRecording ? stopRecording : startRecording}
+                      disabled={isListening}
+                      className={`absolute right-20 top-1/2 -translate-y-1/2 w-10 h-10 p-0 rounded-full ${
+                        isRecording ? 'bg-red-500 hover:bg-red-600' : 'bg-secondary hover:bg-secondary/80'
+                      } ${isListening ? 'opacity-50' : ''}`}
+                    >
+                      {isRecording ? (
+                        <Square className="w-4 h-4" />
+                      ) : (
+                        <Mic className="w-4 h-4" />
+                      )}
+                    </Button>
+
+                    {story && (
+                      <Button
+                        type="submit"
+                        disabled={isGenerating}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 disabled:opacity-50"
+                      >
+                        {isGenerating ? "Generating..." : "Generate"}
+                      </Button>
+                    )}
+                  </div>
+
+                  {/* Listening indicator */}
+                  {isListening && (
+                    <div className="text-center mt-4">
+                      <p className="text-green-400 font-medium animate-pulse">I'm listening...</p>
+                    </div>
+                  )}
                 </form>
 
                 {!story && !isGenerating && (
