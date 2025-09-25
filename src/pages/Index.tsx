@@ -32,9 +32,9 @@ const Index = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10 min-h-screen flex flex-col">
-        {/* Logo and description positioned higher */}
+        {/* Logo and description positioned lower */}
         <div className="flex-1 flex flex-col justify-center">
-          <div className="max-w-4xl mx-auto text-center space-y-6 -mt-20">
+          <div className="max-w-4xl mx-auto text-center space-y-6 mt-8">
             <Logo className="flex justify-center" />
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">Your story matters. Transform your raw ideas into polished lyrics. Record your thoughts, choose your style, and watch AI craft your vision into verses.</p>
           </div>
@@ -97,10 +97,6 @@ const Index = () => {
             <div className="absolute inset-4 bg-gradient-radial from-primary/20 to-transparent rounded-full"></div>
           </div>
 
-          {/* Keep the minimalist number element from screenshot 7 */}
-          <div className="absolute left-1/3 bottom-8 opacity-10">
-            <div className="text-8xl font-thin text-primary/50 tracking-[0.3em]">222</div>
-          </div>
         </div>
 
         {/* Auth buttons positioned in bottom area */}
