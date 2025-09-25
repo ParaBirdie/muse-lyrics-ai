@@ -289,7 +289,7 @@ const Home = () => {
               variant="ghost"
               size="sm"
               onClick={() => navigate("/")}
-              className="text-muted-foreground hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground hover:bg-transparent active:bg-transparent focus:bg-transparent"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
