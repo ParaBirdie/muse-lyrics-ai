@@ -172,12 +172,12 @@ const Home = () => {
                     Tell Your Story
                   </h1>
                 </div>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '0.8s'}}>
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '2.2s'}}>
                   Transform your thoughts into powerful lyrics. What's on your mind?
                 </p>
               </div>
 
-            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '1.2s'}}>
+            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '2.2s'}}>
               <div className="relative">
                 <Input
                   value={story}
@@ -200,7 +200,7 @@ const Home = () => {
             </form>
 
               {!story && !isGenerating && (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8 animate-fade-in-up" style={{animationDelay: '1.6s'}}>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8 animate-fade-in-up" style={{animationDelay: '2.2s'}}>
                   <Button
                     variant="secondary"
                     className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
