@@ -558,7 +558,7 @@ const Home = () => {
                   <Button
                     onClick={handleGenerateVerse2}
                     disabled={isGeneratingVerse2}
-                    className="bg-accent hover:bg-accent/90"
+                    className="bg-primary hover:bg-primary/90"
                   >
                     {isGeneratingVerse2 ? "Generating..." : "Generate Verse 2"}
                   </Button>
