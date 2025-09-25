@@ -53,22 +53,14 @@ const Home = () => {
     // Check if user is authenticated
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        navigate("/signin");
-        return;
-      }
-      setUser(session.user);
+      setUser(session?.user || null);
     };
 
     checkUser();
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (!session) {
-        navigate("/signin");
-      } else {
-        setUser(session.user);
-      }
+      setUser(session?.user || null);
     });
 
     return () => subscription.unsubscribe();
