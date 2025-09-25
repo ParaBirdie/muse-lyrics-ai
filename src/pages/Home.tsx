@@ -159,7 +159,7 @@ const Home = () => {
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-accent rounded-full blur-3xl opacity-[0.03]"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 min-h-screen flex flex-col">
+      <div className="container mx-auto px-4 relative z-10 min-h-screen flex flex-col pb-16">
         {/* Header */}
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center gap-4">
@@ -289,7 +289,7 @@ const Home = () => {
                 </CardContent>
               </Card>
               
-              <div className="flex gap-8 justify-center mb-32">
+              <div className="flex gap-8 justify-center mb-8">
                 <Button
                   onClick={handleRegenerate}
                   variant="secondary"
