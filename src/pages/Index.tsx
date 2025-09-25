@@ -56,7 +56,7 @@ const Index = () => {
 
           {/* CASH MONEY RECORDS - center right */}
           <div className="absolute right-16 top-12 opacity-30 transform rotate-3">
-            <div className="border-4 border-foreground p-3 bg-foreground text-background">
+            <div className="border-8 border-foreground p-4 bg-foreground text-background">
               <div className="text-xs font-black tracking-tight">CASH MONEY</div>
               <div className="text-3xl font-black my-1">$</div>
               <div className="text-xs font-black tracking-tight">RECORDS</div>
