@@ -63,8 +63,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* LIL WAYNE - left center */}
-          <div className="absolute left-20 top-32 opacity-20 transform rotate-[-6deg]">
+          {/* LIL WAYNE - moved to footer area */}
+          <div className="absolute right-32 bottom-8 opacity-20 transform rotate-[-6deg]">
             <div className="text-3xl font-black text-foreground tracking-[0.1em]">
               LIL<span className="text-primary">W</span>AYNE
             </div>
