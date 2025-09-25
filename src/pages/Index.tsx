@@ -37,6 +37,9 @@ const Index = () => {
                     <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
                       Create Account
                     </button>
+                    <button className="w-full p-2 text-muted-foreground hover:text-foreground transition-colors text-sm underline underline-offset-4 hover:no-underline">
+                      Skip for now
+                    </button>
                   </div>
                 </div>
               </div>
