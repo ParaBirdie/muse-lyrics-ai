@@ -86,11 +86,11 @@ const Index = () => {
           <div className="flex justify-center max-w-md mx-auto -mt-4">
             <div className="space-y-4 w-full">
               <Link to="/signin">
-                <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98] py-[12px]">
+                <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98] py-[12px] my-[20px]">
                   Sign In
                 </button>
               </Link>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground my-0">
                 Don't have an account?{" "}
                 <Link to="/auth" className="text-primary hover:text-primary/80 underline underline-offset-4 hover:no-underline transition-colors">
                   Sign up here
