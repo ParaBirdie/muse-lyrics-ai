@@ -1,58 +1,66 @@
 import { AuthForm } from "@/components/auth/AuthForm";
+import { Logo } from "@/components/ui/logo";
 
 const Index = () => {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#0a0a0a', color: '#ffffff' }}>
-      {/* Test content to ensure visibility */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+      {/* Background artistic elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-accent rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        <div className="max-w-4xl mx-auto text-center space-y-12">
           {/* Logo/Brand */}
-          <div className="space-y-4">
-            <h1 className="text-6xl font-bold text-white">
-              <span style={{ color: '#00ff00' }}>Ghost Writer</span>
-              <span style={{ color: '#ffffff' }}>.AI</span>
-            </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          <div className="space-y-6">
+            <Logo className="flex justify-center" />
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">
               Transform your raw ideas into polished lyrics. Record your thoughts, 
               choose your style, and watch AI craft your vision into verses.
             </p>
           </div>
 
-          {/* Simple test form instead of AuthForm temporarily */}
+          {/* Auth Form */}
           <div className="max-w-md mx-auto">
-            <div className="w-full p-8 bg-gray-900 border border-gray-700 rounded-lg">
-              <div className="space-y-6">
-                <div className="text-center space-y-2">
-                  <h2 className="text-3xl font-bold text-white">
-                    Create Account
-                  </h2>
-                  <p className="text-gray-400">
-                    Transform your ideas into lyrics with AI
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full p-3 bg-gray-800 border border-gray-600 rounded text-white"
-                  />
-                  <input
-                    type="password"
-                    placeholder="Enter your password"
-                    className="w-full p-3 bg-gray-800 border border-gray-600 rounded text-white"
-                  />
-                  <button className="w-full p-3 bg-green-500 text-black font-semibold rounded hover:bg-green-400">
-                    Create Account
-                  </button>
+            <div className="relative">
+              {/* Artistic accent behind form */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-2xl blur-xl opacity-30"></div>
+              
+              <div className="relative w-full p-8 bg-card border border-border rounded-xl backdrop-blur-sm">
+                <div className="space-y-6">
+                  <div className="text-center space-y-2">
+                    <h2 className="text-3xl font-bold text-foreground">
+                      Create Account
+                    </h2>
+                    <p className="text-muted-foreground">
+                      Transform your ideas into lyrics with AI
+                    </p>
+                  </div>
+                  <div className="space-y-4">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="w-full p-3 bg-input border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    />
+                    <input
+                      type="password"
+                      placeholder="Enter your password"
+                      className="w-full p-3 bg-input border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    />
+                    <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                      Create Account
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Footer */}
-          <div className="pt-16 border-t border-gray-700">
-            <p className="text-gray-400 text-sm">
-              Join thousands of artists already creating with Ghost Writer.AI
+          <div className="pt-16 border-t border-border">
+            <p className="text-muted-foreground text-sm">
+              Join thousands of artists already creating with <span className="text-primary font-semibold">GhostPen.AI</span>
             </p>
           </div>
         </div>
