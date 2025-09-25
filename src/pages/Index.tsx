@@ -1,9 +1,7 @@
 import { Logo } from "@/components/ui/logo";
 import { Link } from "react-router-dom";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+  return <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       {/* Abstract artistic background elements inspired by uploaded images */}
       <div className="absolute inset-0">
         {/* Abstract figure silhouette - inspired by first image */}
@@ -41,7 +39,7 @@ const Index = () => {
         </div>
 
         {/* Artist logos scattered randomly across the screen */}
-        <div className="relative py-16 min-h-[400px]">
+        <div className="relative min-h-[400px] py-0">
           {/* J.COLE logo - top left */}
           <div className="absolute left-12 top-8 opacity-25 transform rotate-[-5deg]">
             <div className="text-2xl font-bold text-foreground tracking-wide">
@@ -104,7 +102,7 @@ const Index = () => {
           <div className="flex justify-center max-w-md mx-auto">
             <div className="space-y-4 w-full">
               <Link to="/signin">
-                <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                <button className="w-full p-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all transform hover:scale-[1.02] active:scale-[0.98] py-[12px]">
                   Sign In
                 </button>
               </Link>
@@ -125,7 +123,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
 export default Index;
