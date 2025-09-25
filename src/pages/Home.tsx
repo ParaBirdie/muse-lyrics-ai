@@ -4,12 +4,17 @@ import { Logo } from "@/components/ui/logo";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 import type { User } from "@supabase/supabase-js";
 
 const Home = () => {
   const [user, setUser] = useState<User | null>(null);
   const [story, setStory] = useState("");
+  const [lyrics, setLyrics] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     // Check if user is authenticated
@@ -40,10 +45,61 @@ const Home = () => {
     await supabase.auth.signOut();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Process the story input
-    console.log("Story input:", story);
+    
+    if (!story.trim()) {
+      toast({
+        title: "Please enter a story",
+        description: "Tell us what you'd like your lyrics to be about",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (story.trim().length < 5) {
+      toast({
+        title: "Story too short",
+        description: "Please provide more details about your story or theme",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsGenerating(true);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-lyrics', {
+        body: { story: story.trim() }
+      });
+
+      if (error) throw error;
+
+      if (data?.lyrics) {
+        setLyrics(data.lyrics);
+        toast({
+          title: "Lyrics generated!",
+          description: "Your personalized lyrics are ready",
+        });
+      } else {
+        throw new Error('No lyrics received');
+      }
+      
+    } catch (error: any) {
+      console.error('Error generating lyrics:', error);
+      toast({
+        title: "Failed to generate lyrics",
+        description: error.message || "Please try again with a different theme",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleRegenerate = () => {
+    setLyrics("");
+    setStory("");
   };
 
   if (!user) {
@@ -93,15 +149,16 @@ const Home = () => {
 
         {/* Main content - centered like ChatGPT */}
         <div className="flex-1 flex flex-col justify-center max-w-4xl mx-auto w-full">
-          <div className="space-y-8 text-center">
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Tell Your Story
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Transform your thoughts into powerful lyrics. What's on your mind?
-              </p>
-            </div>
+          {!lyrics ? (
+            <div className="space-y-8 text-center">
+              <div className="space-y-4">
+                <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Tell Your Story
+                </h1>
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                  Transform your thoughts into powerful lyrics. What's on your mind?
+                </p>
+              </div>
 
             <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
               <div className="relative">
@@ -114,43 +171,81 @@ const Home = () => {
                 {story && (
                   <Button
                     type="submit"
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90"
+                    disabled={isGenerating}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 disabled:opacity-50"
                   >
-                    Generate
+                    {isGenerating ? "Generating..." : "Generate"}
                   </Button>
                 )}
               </div>
             </form>
 
-            {!story && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8">
+              {!story && !isGenerating && (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8">
+                  <Button
+                    variant="secondary"
+                    className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
+                    onClick={() => setStory("A story about overcoming challenges")}
+                  >
+                    <span className="font-semibold">Inspiration</span>
+                    <span className="text-sm text-muted-foreground">Write about overcoming challenges</span>
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
+                    onClick={() => setStory("Love and relationships")}
+                  >
+                    <span className="font-semibold">Love</span>
+                    <span className="text-sm text-muted-foreground">Express feelings and relationships</span>
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
+                    onClick={() => setStory("Success and ambition")}
+                  >
+                    <span className="font-semibold">Ambition</span>
+                    <span className="text-sm text-muted-foreground">Share your dreams and goals</span>
+                  </Button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-6 text-center">
+              <Card className="max-w-2xl mx-auto bg-card/50 backdrop-blur-sm border-border/50">
+                <CardHeader>
+                  <CardTitle className="text-2xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    Your Generated Lyrics
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-left space-y-2">
+                    {lyrics.split('\n').filter(line => line.trim()).map((line, index) => (
+                      <p key={index} className="text-foreground leading-relaxed">
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <div className="flex gap-4 justify-center">
                 <Button
+                  onClick={handleRegenerate}
                   variant="secondary"
-                  className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
-                  onClick={() => setStory("A story about overcoming challenges")}
+                  className="bg-card/30 hover:bg-card/50 border-border/30"
                 >
-                  <span className="font-semibold">Inspiration</span>
-                  <span className="text-sm text-muted-foreground">Write about overcoming challenges</span>
+                  Create New Lyrics
                 </Button>
                 <Button
-                  variant="secondary"
-                  className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
-                  onClick={() => setStory("Love and relationships")}
+                  onClick={() => handleSubmit({ preventDefault: () => {} } as React.FormEvent)}
+                  disabled={isGenerating}
+                  className="bg-primary hover:bg-primary/90"
                 >
-                  <span className="font-semibold">Love</span>
-                  <span className="text-sm text-muted-foreground">Express feelings and relationships</span>
-                </Button>
-                <Button
-                  variant="secondary"
-                  className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
-                  onClick={() => setStory("Success and ambition")}
-                >
-                  <span className="font-semibold">Ambition</span>
-                  <span className="text-sm text-muted-foreground">Share your dreams and goals</span>
+                  {isGenerating ? "Regenerating..." : "Regenerate"}
                 </Button>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
