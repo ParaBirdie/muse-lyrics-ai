@@ -255,13 +255,7 @@ const Home = () => {
     }
   };
 
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-muted-foreground">Loading...</div>
-      </div>
-    );
-  }
+  // Remove the loading check since we now allow unauthenticated access
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
@@ -304,13 +298,15 @@ const Home = () => {
             )}
             <Logo size="md" />
           </div>
-          <Button
-            variant="secondary"
-            onClick={handleSignOut}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            Sign Out
-          </Button>
+          {user && (
+            <Button
+              variant="secondary"
+              onClick={handleSignOut}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              Sign Out
+            </Button>
+          )}
         </div>
 
         {/* Main content - centered like ChatGPT */}
