@@ -40,33 +40,66 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Prominent artistic elements in middle section */}
-        <div className="relative py-12">
-          {/* Abstract figure silhouette - more visible */}
-          <div className="absolute left-8 top-4 w-48 h-60 opacity-20">
-            <div className="w-full h-full bg-gradient-to-br from-foreground/60 to-foreground/30 transform rotate-12 rounded-[30px]">
-            </div>
-            <div className="absolute top-6 left-3 w-12 h-12 bg-foreground/50 rounded-full"></div>
-            <div className="absolute top-2 left-2 text-foreground/40 text-xs font-bold tracking-wider">VISIONS</div>
-          </div>
-          
-          {/* Circular portrait element */}
-          <div className="absolute right-12 top-8 w-40 h-40 opacity-25">
-            <div className="w-full h-full border-8 border-primary/60 rounded-full">
-              <div className="w-full h-full bg-gradient-radial from-primary/30 to-transparent rounded-full flex items-center justify-center">
-                <div className="w-20 h-20 bg-foreground/40 rounded-full"></div>
-              </div>
+        {/* Artist logos scattered randomly across the screen */}
+        <div className="relative py-16 min-h-[400px]">
+          {/* J.COLE logo - top left */}
+          <div className="absolute left-12 top-8 opacity-25 transform rotate-[-5deg]">
+            <div className="text-2xl font-bold text-foreground tracking-wide">
+              J
+              <span className="relative">
+                C
+                <div className="absolute -top-1 -right-1 w-3 h-3 border-2 border-foreground rounded-full"></div>
+                <div className="absolute -top-2 -right-3 w-2 h-4 border-l-2 border-foreground transform rotate-12"></div>
+                <div className="absolute -top-2 right-1 w-2 h-4 border-l-2 border-foreground transform -rotate-12"></div>
+              </span>
+              OLE
             </div>
           </div>
-          
-          {/* Minimalist number element */}
-          <div className="absolute left-1/2 top-12 transform -translate-x-1/2 opacity-15">
-            <div className="text-6xl font-thin text-primary tracking-[0.2em]">222</div>
+
+          {/* CASH MONEY RECORDS - center right */}
+          <div className="absolute right-16 top-12 opacity-30 transform rotate-3">
+            <div className="border-4 border-foreground p-3 bg-foreground text-background">
+              <div className="text-xs font-black tracking-tight">CASH MONEY</div>
+              <div className="text-3xl font-black my-1">$</div>
+              <div className="text-xs font-black tracking-tight">RECORDS</div>
+            </div>
           </div>
-          
-          {/* Warm abstract shapes */}
-          <div className="absolute right-8 bottom-4 w-32 h-24 opacity-20">
-            <div className="w-full h-full bg-gradient-to-tr from-accent/50 to-primary/40 rounded-2xl transform -rotate-12"></div>
+
+          {/* LIL WAYNE - left center */}
+          <div className="absolute left-20 top-32 opacity-28 transform rotate-[-3deg]">
+            <div className="text-3xl font-black text-foreground tracking-[0.1em]">
+              LIL<span className="text-primary">W</span>AYNE
+            </div>
+          </div>
+
+          {/* DR. DRE - bottom right */}
+          <div className="absolute right-12 bottom-16 opacity-25 transform rotate-2">
+            <div className="text-2xl font-thin text-foreground tracking-[0.3em]">
+              DR
+              <span className="relative mx-2">
+                <span className="text-primary">⚘</span>
+              </span>
+              DRE
+            </div>
+          </div>
+
+          {/* 50 CENT - center */}
+          <div className="absolute left-1/2 top-20 transform -translate-x-1/2 rotate-[-2deg] opacity-20">
+            <div className="text-5xl font-black text-foreground">
+              <span className="text-6xl">50</span>
+              <div className="text-2xl font-black tracking-wider -mt-2">CENT</div>
+            </div>
+          </div>
+
+          {/* Keep the green circular elements from screenshots 6-7 */}
+          <div className="absolute top-4 right-8 w-32 h-32 opacity-[0.06]">
+            <div className="w-full h-full border-4 border-primary/40 rounded-full"></div>
+            <div className="absolute inset-4 bg-gradient-radial from-primary/20 to-transparent rounded-full"></div>
+          </div>
+
+          {/* Keep the minimalist number element from screenshot 7 */}
+          <div className="absolute left-1/3 bottom-8 opacity-10">
+            <div className="text-8xl font-thin text-primary/50 tracking-[0.3em]">222</div>
           </div>
         </div>
 
