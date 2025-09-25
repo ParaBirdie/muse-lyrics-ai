@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -137,7 +138,18 @@ const Home = () => {
       <div className="container mx-auto px-4 relative z-10 min-h-screen flex flex-col">
         {/* Header */}
         <div className="flex justify-between items-center py-6">
-          <Logo />
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate("/")}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+            <Logo />
+          </div>
           <Button
             variant="secondary"
             onClick={handleSignOut}
