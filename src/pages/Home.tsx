@@ -15,8 +15,31 @@ const Home = () => {
   const [lyrics, setLyrics] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [randomEmotions, setRandomEmotions] = useState<Array<{title: string, description: string, prompt: string}>>([]);
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  // Emotion categories pool
+  const emotionCategories = [
+    { title: "Inspiration", description: "Write about overcoming challenges", prompt: "A story about overcoming challenges and rising above adversity" },
+    { title: "Love", description: "Express feelings and relationships", prompt: "Love and relationships, deep connections with someone special" },
+    { title: "Ambition", description: "Share your dreams and goals", prompt: "Success and ambition, chasing dreams and achieving goals" },
+    { title: "Nostalgia", description: "Reflect on cherished memories", prompt: "Nostalgic memories from childhood or better times" },
+    { title: "Freedom", description: "Celebrate independence", prompt: "Breaking free from constraints and finding true independence" },
+    { title: "Heartbreak", description: "Process pain and healing", prompt: "Heartbreak, loss, and the journey toward healing" },
+    { title: "Adventure", description: "Embrace new experiences", prompt: "Adventure and exploring new places or experiences" },
+    { title: "Hope", description: "Find light in darkness", prompt: "Hope and optimism during difficult times" },
+    { title: "Rebellion", description: "Challenge the status quo", prompt: "Rebellion against society or fighting for what's right" },
+    { title: "Family", description: "Honor your roots", prompt: "Family bonds, heritage, and the people who shaped you" },
+    { title: "Dreams", description: "Chase your aspirations", prompt: "Following dreams and never giving up on aspirations" },
+    { title: "Victory", description: "Celebrate achievements", prompt: "Victory and triumph after a long struggle" }
+  ];
+
+  // Generate 3 random emotions on component mount
+  useEffect(() => {
+    const shuffled = [...emotionCategories].sort(() => 0.5 - Math.random());
+    setRandomEmotions(shuffled.slice(0, 3));
+  }, []);
 
   useEffect(() => {
     // Check if user is authenticated
@@ -203,30 +226,17 @@ const Home = () => {
 
                 {!story && !isGenerating && (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8">
-                  <Button
-                    variant="secondary"
-                    className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
-                    onClick={() => setStory("A story about overcoming challenges")}
-                  >
-                    <span className="font-semibold">Inspiration</span>
-                    <span className="text-sm text-muted-foreground">Write about overcoming challenges</span>
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
-                    onClick={() => setStory("Love and relationships")}
-                  >
-                    <span className="font-semibold">Love</span>
-                    <span className="text-sm text-muted-foreground">Express feelings and relationships</span>
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
-                    onClick={() => setStory("Success and ambition")}
-                  >
-                    <span className="font-semibold">Ambition</span>
-                    <span className="text-sm text-muted-foreground">Share your dreams and goals</span>
-                  </Button>
+                    {randomEmotions.map((emotion, index) => (
+                      <Button
+                        key={index}
+                        variant="secondary"
+                        className="p-6 h-auto flex-col space-y-2 bg-card/30 hover:bg-card/50 border-border/30"
+                        onClick={() => setStory(emotion.prompt)}
+                      >
+                        <span className="font-semibold">{emotion.title}</span>
+                        <span className="text-sm text-muted-foreground">{emotion.description}</span>
+                      </Button>
+                    ))}
                   </div>
                 )}
               </div>
