@@ -11,7 +11,7 @@ const Auth = () => {
   const handleCreateAccount = (e: React.FormEvent) => {
     e.preventDefault();
     if (email && password) {
-      navigate("/authenticate-email");
+      navigate("/signin");
     }
   };
 
